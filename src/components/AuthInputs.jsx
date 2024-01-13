@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "./Button";
+import Input from "./Input";
 
 export default function AuthInputs() {
 	const [enteredEmail, setEnteredEmail] = useState("");
@@ -21,38 +23,31 @@ export default function AuthInputs() {
 	const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
 	return (
-		<div id="auth-inputs">
+		<div
+			id="auth-inputs"
+			className="w-full max-w-sm p-8 rounded shadow-md bg-gradient-to-b"
+		>
 			<div className="controls">
-				<p>
-					<label className={`label ${emailNotValid ? "invalid" : ""}`}>
-						Email
-					</label>
-					<input
-						type="email"
-						className={emailNotValid ? "invalid" : undefined}
-						onChange={(event) => handleInputChange("email", event.target.value)}
-					/>
-				</p>
-				<p>
-					<label className={`label ${emailNotValid ? "invalid" : ""}`}>
-						Password
-					</label>
-					<input
-						type="password"
-						className={passwordNotValid ? "invalid" : undefined}
-						onChange={(event) =>
-							handleInputChange("password", event.target.value)
-						}
-					/>
-				</p>
+				<Input
+					invalid={emailNotValid}
+					label="Email"
+					type="email"
+					onChange={(event) => handleInputChange("email", event.target.value)}
+				/>
+				<Input
+					invalid={passwordNotValid}
+					label="Password"
+					type="password"
+					onChange={(event) =>
+						handleInputChange("password", event.target.value)
+					}
+				/>
 			</div>
 			<div className="actions">
 				<button type="button" className="text-button">
 					Create a new account
 				</button>
-				<button className="button" onClick={handleLogin}>
-					Sign In
-				</button>
+				<Button onClick={handleLogin}>Sign In</Button>
 			</div>
 		</div>
 	);
